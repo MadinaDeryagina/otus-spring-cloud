@@ -1,0 +1,9 @@
+otus\deryagina\spring\library\data\docker\controller\BookControllerTest.class
+otus\deryagina\spring\library\data\docker\dao\BookRepositoryTest.class
+otus\deryagina\spring\library\data\docker\dao\AuthorRepositoryTest.class
+otus\deryagina\spring\library\data\docker\dao\CommentRepositoryTest.class
+otus\deryagina\spring\library\data\docker\dto\BookDTOTest.class
+otus\deryagina\spring\library\data\docker\services\BookServiceImplTest.class
+otus\deryagina\spring\library\data\docker\dao\GenreRepositoryTest.class
+otus\deryagina\spring\library\data\docker\mapper\ModelMapperTest.class
+otus\deryagina\spring\library\data\docker\mapper\ModelMapperTest$BookMapperSpringTestConfiguration.class

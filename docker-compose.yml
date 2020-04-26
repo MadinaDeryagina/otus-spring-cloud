@@ -1,0 +1,52 @@
+version: "3"
+services:
+  discovery:
+    build:
+      context: .
+      dockerfile: discovery/Dockerfile
+    networks:
+      - my-network
+    ports:
+      - "8761:8761"
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=my_db
+    ports:
+      - "5435:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+    networks:
+      - my-network
+  library:
+    build:
+      context: .
+      dockerfile: rest-library-with-docker/Dockerfile
+    networks:
+      - my-network
+    ports:
+      - "8085:8080"
+    environment:
+      - DB_DRIVER=org.postgresql.Driver
+      - DB_URL=jdbc:postgresql://postgres:5432/my_db
+      - DB_LOGIN=postgres
+      - DB_PASSWORD=postgres
+      - EUREKA_URL=http://discovery:8761/eureka
+    depends_on:
+      - postgres
+  library-client:
+    build:
+      context: .
+      dockerfile: library-client/Dockerfile
+    networks:
+      - my-network
+    ports:
+      - "8762:8762"
+    environment:
+      - EUREKA_URL=http://discovery:8761/eureka
+networks:
+  my-network: {}
+volumes:
+  my_dbdata:
