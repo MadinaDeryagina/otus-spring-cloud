@@ -15,13 +15,13 @@ spring:
       ddl-auto: none
     show-sql: true
 server:
-  port: 8080
+  port: 8085
 management:
   endpoints:
-    enabled-by-default: false
+    enabled-by-default: true
     web:
       exposure:
-        include: metrics, health, logfile
+        include: '*'
   endpoint:
     metrics:
       enabled: true

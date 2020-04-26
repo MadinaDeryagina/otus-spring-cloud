@@ -1,5 +1,6 @@
 package otus.deryagina.spring.library.data.docker.services;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,6 +21,7 @@ import otus.deryagina.spring.library.data.docker.mapper.ModelMapper;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +31,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
+    private static final String NOT_AVAILABLE = "NOT_AVAILABLE";
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final GenreRepository genreRepository;
@@ -92,7 +95,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    @Cacheable("books")
+    @HystrixCommand(commandKey = "getBooks",fallbackMethod = "buildFallbackBooks")
     public List<BookDTO> findAllBooks() {
         log.info("go to db");
         List<BookDTO> resultList = new ArrayList<>();
@@ -162,5 +165,17 @@ public class BookServiceImpl implements BookService {
         return modelMapper.entityToDto(book);
     }
 
-
+    public List<BookDTO> buildFallbackBooks(){
+        List<BookDTO> dummyList= new ArrayList<>();
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setTitle(NOT_AVAILABLE);
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setFullName(NOT_AVAILABLE);
+        GenreDTO genreDTO = new GenreDTO();
+        genreDTO.setName(NOT_AVAILABLE);
+        bookDTO.setAuthorDTOS(Collections.singletonList(authorDTO));
+        bookDTO.setGenreDTOS(Collections.singletonList(genreDTO));
+        dummyList.add(bookDTO);
+        return dummyList;
+    }
 }

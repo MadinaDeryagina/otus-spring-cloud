@@ -37,7 +37,7 @@ services:
     networks:
       - my-network
     ports:
-      - "8085:8080"
+      - "8085:8085"
     environment:
       - DB_DRIVER=org.postgresql.Driver
       - DB_URL=jdbc:postgresql://postgres:5432/my_db

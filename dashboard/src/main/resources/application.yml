@@ -7,8 +7,12 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_URL}
 turbine:
-  app-config: library-client
+  app-config: library-client, library
   cluster-name-expression: new String("default")
+  InstanceMonitor:
+    eventStream:
+      skipLineLogic:
+        enabled: false
 management:
   endpoints:
     web:
