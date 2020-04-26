@@ -8,6 +8,16 @@ services:
       - my-network
     ports:
       - "8761:8761"
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    networks:
+      - my-network
+    ports:
+      - "8763:8763"
+    environment:
+      - EUREKA_URL=http://discovery:8761/eureka
   postgres:
     image: postgres:latest
     environment:
