@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "application",
+      "type": "otus.deryagina.spring.library.data.docker.configuration.ApplicationSettings",
+      "sourceType": "otus.deryagina.spring.library.data.docker.configuration.ApplicationSettings"
+    }
+  ],
+  "properties": [
+    {
+      "name": "application.version",
+      "type": "java.lang.String",
+      "sourceType": "otus.deryagina.spring.library.data.docker.configuration.ApplicationSettings"
+    }
+  ],
+  "hints": []
+}

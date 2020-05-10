@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: otus.deryagina.spring.library.data.docker.dao.BookRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.098 s - in otus.deryagina.spring.library.data.docker.dao.BookRepositoryTest
